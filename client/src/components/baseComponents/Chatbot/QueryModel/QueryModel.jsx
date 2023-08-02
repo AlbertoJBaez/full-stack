@@ -15,7 +15,7 @@ const QueryModel = (props) => {
 
   useEffect(() => {
     setLoading(true);
-    axios[method](`http://localhost:3000/${queryParamStr}`)
+    axios[method](`https://isrtmyit2d.eu-west-1.awsapprunner.com/${queryParamStr}`)
          .then(res => {
           setModelResponse(res.data)
           console.log(res.data);
