@@ -23,8 +23,11 @@ COPY . .
 # Comando para construir la aplicación de React (si es necesario)
 # RUN npm run build
 
-# Exponer el puerto en el que escucha el servidor del front-end (si es necesario)
-EXPOSE 8080
+# Establece una variable de entorno para el puerto del cliente
+ENV PORT=5173
 
-# Comando para iniciar el servidor del front-end (por ejemplo, con serve)
-CMD ["sh", "-c", "npm run dev -- --port 8080 --host 0.0.0.0"]
+# Expone el puerto en el que se ejecutará el cliente
+EXPOSE $PORT
+
+# Comando para iniciar el entorno de desarrollo del cliente
+CMD ["sh", "-c", "npm run dev -- --port $PORT --host 0.0.0.0"]

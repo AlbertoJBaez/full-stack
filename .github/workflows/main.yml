@@ -134,7 +134,7 @@ jobs:
           region: ${{ secrets.AWS_REGION }}
           cpu: 1
           memory: 2
-          port: 8080
+          port: 5173
           # wait-for-service-stability: true
           copy-env-vars: |
             VITE_WEATHER_API_KEY
