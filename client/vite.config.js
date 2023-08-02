@@ -7,12 +7,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      "/api": {
-        target:"https://ytpa6cbcqt.eu-west-1.awsapprunner.com/"
-      },
-      "/auth/email/login": {
-        target:"https://ytpa6cbcqt.eu-west-1.awsapprunner.com/"
+      "/api": "https://ytpa6cbcqt.eu-west-1.awsapprunner.com/",
+      "/auth": "https://ytpa6cbcqt.eu-west-1.awsapprunner.com/"
       }
     }
   }
-})
+)
