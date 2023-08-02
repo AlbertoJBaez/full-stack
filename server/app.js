@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 //Passport and session
 app.use(session({
     secret: process.env.COOKIE_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true
 }));
 app.use(passport.initialize());
@@ -43,6 +43,7 @@ app.use(error404);
 
 const server = app.listen(port, () => {
     console.log(`****Conected in port ${port}****`);
+    console.log(process.env.COOKIE_SECRET);
 })
 
 module.exports = server;
