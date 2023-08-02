@@ -42,17 +42,7 @@ jobs:
       - name: Deploy server to App Runner
         id: deploy-server-apprunner
         uses: awslabs/amazon-app-runner-deploy@main
-        with:
-          service: app-runner-desafio-server
-          image: ${{ steps.build-server-image.outputs.image }}
-          access-role-arn: ${{ secrets.ROLE_ARN }}
-          runtime: NODEJS_16
-          region: ${{ secrets.AWS_REGION }}
-          cpu: 1
-          memory: 2
-          port: 3000
-          wait-for-service-stability: true
-        env:
+        env:  
           COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           GMAIL_SENDER: ${{ secrets.GMAIL_SENDER }}
@@ -68,6 +58,33 @@ jobs:
           PORT: ${{ secrets.PORT }}
           DOMAIN: ${{ secrets.DOMAIN }}
           FRONTEND_DOMAIN: ${{ secrets.FRONTEND_DOMAIN }}
+        with:
+          service: app-runner-desafio-server
+          image: ${{ steps.build-server-image.outputs.image }}
+          access-role-arn: ${{ secrets.ROLE_ARN }}
+          runtime: NODEJS_16
+          region: ${{ secrets.AWS_REGION }}
+          cpu: 1
+          memory: 2
+          port: 3000
+          wait-for-service-stability: true
+          copy-env-vars: |
+            COOKIE_SECRET
+            JWT_SECRET
+            GMAIL_SENDER
+            GMAIL_CLIENT_ID
+            GMAIL_CLIENT_SECRET
+            ACCESS_TOKEN
+            REFRESH_TOKEN
+            MYSQL_port
+            MYSQL_HOST
+            MYSQL_USER
+            MYSQL_DATABASE
+            MYSQL_PASSWORD
+            PORT
+            DOMAIN
+            FRONTEND_DOMAIN
+
       - name: App Runner output
         run: echo "App runner output ${{ steps.deploy-server-apprunner.outputs.service-id }}"
 
@@ -107,6 +124,8 @@ jobs:
       - name: Deploy client to App Runner
         id: deploy-client-apprunner
         uses: awslabs/amazon-app-runner-deploy@main
+        env:
+          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
         with:
           service: app-runner-desafio-client
           image: ${{ steps.build-client-image.outputs.image }}
@@ -117,8 +136,8 @@ jobs:
           memory: 2
           port: 8080
           wait-for-service-stability: true
-        env:
-          VITE_WEATHER_API_KEY: ${{ secrets.VITE_WEATHER_API_KEY }}
+          copy-env-vars: |
+            VITE_WEATHER_API_KEY
         
 
       - name: App Runner output
