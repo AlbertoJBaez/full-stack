@@ -8,10 +8,10 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target:"http://127.0.0.1:3000"
+        target:"https://ytpa6cbcqt.eu-west-1.awsapprunner.com/"
       },
       "/auth/email/login": {
-        target:"http://127.0.0.1:3000"
+        target:"https://ytpa6cbcqt.eu-west-1.awsapprunner.com/"
       }
     }
   }
