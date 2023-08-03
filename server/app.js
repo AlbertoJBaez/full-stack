@@ -30,7 +30,7 @@ const authRoutes = require('./routes/authRoutes');
 app.use(express.json()); // Enable data type to receive
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()); //Better access to cookies
-app.use(cors({credentials: true, origin: [process.env.FRONTEND_DOMAIN, "https://bivn3h6nhs.eu-west-1.awsapprunner.com/"]})) //Enable all CORS requests
+app.use(cors({credentials: true, origin: [process.env.FRONTEND_DOMAIN, "https://bivn3h6nhs.eu-west-1.awsapprunner.com/", "https://isrtmyit2d.eu-west-1.awsapprunner.com/"]})) //Enable all CORS requests
 app.use(helmet());
 
 //Routes 
